@@ -26,7 +26,8 @@ public class Main {
             LocalDate nascimento = LocalDate.parse(nascimentoInput, formatter);
             Pessoa pessoa = new Pessoa(nome, altura, peso, nascimento);
 
-            pessoa.exibirInfo();
+            System.out.println(pessoa.toString());
+
 
         } catch (Exception e) {
             System.out.println("Erro ao processar a data você deve ter digitado errado, " +

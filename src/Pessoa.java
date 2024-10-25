@@ -3,10 +3,10 @@ import java.time.Period;
 import java.time.LocalTime;
 
 public class Pessoa {
-    private String nome;
+    private final String nome;
     private double altura;
     private int peso;
-    private LocalDate nascimento;
+    private final LocalDate nascimento;
 
 
     public Pessoa(String nome, double altura, int peso, LocalDate nascimento) {
@@ -32,10 +32,6 @@ public class Pessoa {
         return nascimento;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public void setAltura(double altura) {
         this.altura = altura;
     }
@@ -44,12 +40,8 @@ public class Pessoa {
         this.peso = peso;
     }
 
-    public void setNascimento(LocalDate nascimento) {
-        this.nascimento = nascimento;
-    }
 
-
-    public int calcularIdade(LocalDate nascimento) { //TODO: Calculo da idade ;)
+    public int getIdade(LocalDate nascimento) { //TODO: Calculo da idade ;)
         LocalDate dataAtual = LocalDate.now();
         return Period.between(this.nascimento, dataAtual).getYears();
     }
@@ -65,12 +57,12 @@ public class Pessoa {
         };
     }
 
-    public double calcularIMC() { //TODO: Calculo do IMC :)
+    public double getIMC() { //TODO: Calculo do IMC :)
         return peso / (altura * altura);  // Calcula e retorna o IMC
     }
 
     public String classificarIMC() {
-        double IMC = calcularIMC();
+        double IMC = getIMC();
 
         if (IMC < 18.5) {
             return "Abaixo do peso ideal";
@@ -88,13 +80,14 @@ public class Pessoa {
     }
 
 
-    public void exibirInfo() {
+
+    public String toString() {
         LocalTime agora = LocalTime.now();
         String saudacao = saudacao(agora);
 
-        System.out.printf("Olá %s! %s.\n", nome, saudacao);
-        System.out.printf("%s, sua idade é %d anos.\n", nome, calcularIdade(nascimento));
-        System.out.printf("%s, o seu IMC é: %.2f\n", nome, calcularIMC());
-        System.out.printf("%s, a sua classificação de IMC é: %s\n", nome, classificarIMC());
+        return String.format("Olá %s! %s.\n", nome, saudacao) +
+                String.format("%s, sua idade é %d anos.\n", nome, getIdade(nascimento)) +
+                String.format("%s, o seu IMC é: %.2f\n", nome, getIMC()) +
+                String.format("%s, a sua classificação de IMC é: %s\n", nome, classificarIMC());
     }
 }
