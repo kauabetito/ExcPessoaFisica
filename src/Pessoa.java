@@ -36,7 +36,7 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public void setAltura(double altura){
+    public void setAltura(double altura) {
         this.altura = altura;
     }
 
@@ -49,23 +49,23 @@ public class Pessoa {
     }
 
 
-    public int calcularIdade (LocalDate nascimento) { //TODO: Calculo da idade ;)
+    public int calcularIdade(LocalDate nascimento) { //TODO: Calculo da idade ;)
         LocalDate dataAtual = LocalDate.now();
         return Period.between(this.nascimento, dataAtual).getYears();
     }
 
-    public String saudacao (LocalTime horas) { //TODO: Metodo para horas :)
+    public String saudacao(LocalTime horas) { //TODO: Metodo para horas :)
         int hora = horas.getHour(); // vai obter a hora atual
 
         return switch (hora) {
-           case 5, 6, 7, 8, 9, 10, 11 -> "Bom dia";
-           case 12, 13, 14, 15, 16, 17 -> "Boa tarde";
-           case 0, 1, 2, 3, 4, 18, 19, 20, 21, 22, 23 -> "Boa Noite";
-           default -> "Hora inválida";
-       };
+            case 5, 6, 7, 8, 9, 10, 11 -> "Bom dia";
+            case 12, 13, 14, 15, 16, 17 -> "Boa tarde";
+            case 0, 1, 2, 3, 4, 18, 19, 20, 21, 22, 23 -> "Boa Noite";
+            default -> "Hora inválida";
+        };
     }
 
-    public double calcularIMC () { //TODO: Calculo do IMC :)
+    public double calcularIMC() { //TODO: Calculo do IMC :)
         return peso / (altura * altura);  // Calcula e retorna o IMC
     }
 
@@ -92,9 +92,9 @@ public class Pessoa {
         LocalTime agora = LocalTime.now();
         String saudacao = saudacao(agora);
 
-        System.out.printf("Olá %s!  %s. \n", nome, saudacao);
-        System.out.printf("%s sua Idade é %d \n", nome, calcularIdade(nascimento));
-        System.out.printf("%s o seu IMC é: %d \n", nome,calcularIMC());
-        System.out.printf("%s a sua classificação de IMC é: %d \n",nome,classificarIMC());
+        System.out.printf("Olá %s! %s.\n", nome, saudacao);
+        System.out.printf("%s, sua idade é %d anos.\n", nome, calcularIdade(nascimento));
+        System.out.printf("%s, o seu IMC é: %.2f\n", nome, calcularIMC());
+        System.out.printf("%s, a sua classificação de IMC é: %s\n", nome, classificarIMC());
     }
 }
